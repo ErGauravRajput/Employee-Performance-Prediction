@@ -6,70 +6,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Productivity Prediction Using ML</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
+    :root {
+        --bg-dark: #0a0d12;
+        --glass: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --primary: #4cc9f0;
+        --accent: #7209b7;
+        --text-main: #e8edf2;
+        --text-muted: #b0b8c4;
+        --blur: blur(20px);
+        --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
 
-        /* Navigation Bar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            background-color: black;
-            padding: 10px 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #00bfff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+    }
 
-        nav a:hover {
-            background-color: #00a1d4;
-        }
+    /* NAVBAR */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 14px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 13, 18, 0.75);
+        backdrop-filter: var(--blur);
+        border-bottom: 1px solid var(--glass-border);
+    }
 
-        /* Background Image */
-        .hero {
-            background-image: url('home.png'); /* Update with your image path */
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+    nav span {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
 
+    nav a {
+        text-decoration: none;
+        margin-left: 12px;
+        padding: 8px 18px;
+        font-size: 15px;
+        font-weight: 500;
+        color: white;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        box-shadow: 0 10px 30px rgba(114, 9, 183, 0.45);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    nav a:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 18px 45px rgba(76, 201, 240, 0.6);
+    }
+
+    /* HERO */
+    .hero {
+        height: 100vh;
+        background:
+            linear-gradient(
+                rgba(10, 13, 18, 0.75),
+                rgba(10, 13, 18, 0.85)
+            ),
+            url('home.png');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+    }
+
+    /* HERO CARD */
+    .hero-text {
+        max-width: 900px;
+        padding: 40px 50px;
+        text-align: center;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.10),
+            rgba(255, 255, 255, 0.03)
+        );
+        backdrop-filter: var(--blur);
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-xl);
+        animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hero-text h1 {
+        margin: 0;
+        font-size: 56px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        background: linear-gradient(135deg, #ffffff, #9bdcff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+        margin-top: 18px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
         .hero-text {
-            background-color: rgba(255, 255, 255, 0.6);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
         }
 
         .hero-text h1 {
-            color: black;
-            font-size: 50px;
-            margin: 0;
+            font-size: 40px;
         }
 
-        .hero-text p {
-            color: black;
+        nav span {
             font-size: 18px;
-            margin-top: 10px;
-            max-width: 800px;
         }
-    </style>
+    }
+</style>
+
 </head>
 
 <body>

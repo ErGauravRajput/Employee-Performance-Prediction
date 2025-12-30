@@ -1,68 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Productivity Prediction Using ML</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
+        :root {
+            --bg-main: #0b0f16;
+            --glass: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --primary: #4cc9f0;
+            --accent: #7209b7;
+            --text-main: #e6edf3;
+            --text-muted: #9aa4b2;
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.7);
+            --blur: blur(18px);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        /* PAGE */
+        body, html {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(700px 350px at 15% -10%, rgba(114, 9, 183, 0.25), transparent),
+                radial-gradient(700px 350px at 85% 10%, rgba(76, 201, 240, 0.25), transparent),
+                var(--bg-main);
+            color: var(--text-main);
+        }
+
+        /* NAVBAR */
         nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 32px;
             display: flex;
             justify-content: space-between;
-            background-color: black;
-            padding: 10px 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            align-items: center;
+            background: rgba(10, 13, 18, 0.75);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav span {
+            font-size: 22px;
+            font-weight: 600;
         }
 
         nav a {
-            color: white;
             text-decoration: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #00bfff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            margin-left: 12px;
+            padding: 8px 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: white;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 10px 30px rgba(114, 9, 183, 0.45);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         nav a:hover {
-            background-color: #00a1d4;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 18px 45px rgba(76, 201, 240, 0.6);
         }
 
+        /* CONTENT */
         .container {
-            max-width: 1200px;
+            max-width: 1400px; /* wider page */
             margin: 0 auto;
+            padding: 120px 30px 80px;
         }
-        .prediction-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
+
+        /* TITLE */
+        .container h2 {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 36px;
+            background: linear-gradient(135deg, #ffffff, #b8e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        /* RESULT TEXT */
+        .container p {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .container p strong {
+            color: var(--text-main);
+        }
+
+        /* GRAPH GRID – BIGGER CARDS */
         .graph-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 40px;
         }
+
+        /* GRAPH CARD – LARGE */
         .graph {
-            margin: 20px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-radius: 22px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-xl);
+            padding: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
-        img {
-            max-width: 400px;
-            max-height: 400px;
+
+        .graph:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 90px rgba(76, 201, 240, 0.3);
+        }
+
+        /* GRAPH IMAGE – BIG */
+        .graph img {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 16px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .graph-container {
+                grid-template-columns: 1fr;
+            }
+
+            .graph img {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
-
 <body>
-
     <!-- Navigation Bar -->
     <nav>
         <span style="color: white; font-size: 22px;">Employee Productivity Prediction Using ML</span>
@@ -72,7 +157,6 @@
             <a href="./predict">Predict</a>
         </div>
     </nav>
-
     <!-- Content Wrapper -->
     <div class="container">
         <h2>Prediction Result</h2>

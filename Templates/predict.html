@@ -1,57 +1,8 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Employee Productivity Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px auto;
-            max-width: 600px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        input {
-            padding: 10px;
-            margin-top: 5px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 12px;
-            background-color: #00bfff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #009acd;
-        }
-    </style>
 </head>
 <body>
     <h2>Employee Productivity Prediction</h2>
@@ -99,4 +50,162 @@
         <button type="submit">Predict Productivity</button>
     </form>
 </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Productivity Prediction</title>
+
+    <style>
+        :root {
+            --bg-main: #0b0f16;
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.14);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --primary: #4cc9f0;
+            --accent: #7209b7;
+            --text-main: #e6edf3;
+            --text-muted: #9aa4b2;
+            --shadow-xl: 0 25px 60px rgba(0, 0, 0, 0.65);
+            --blur: blur(18px);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+            background:
+                radial-gradient(600px 300px at 15% -10%, rgba(114, 9, 183, 0.25), transparent),
+                radial-gradient(600px 300px at 85% 10%, rgba(76, 201, 240, 0.25), transparent),
+                var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 640px;
+            background: var(--card-bg);
+            backdrop-filter: var(--blur);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-xl);
+            padding: 36px 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 0 0 32px;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #b8e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: var(--input-bg);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(76, 201, 240, 0.25);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 34px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 15px 40px rgba(114, 9, 183, 0.45);
+        }
+
+        button:hover {
+            box-shadow: 0 22px 55px rgba(76, 201, 240, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Employee Productivity Prediction</h2>
+
+        <form action="/submit" method="post">
+
+            <label>Quarter (1–5)</label>
+            <input type="number" name="quarter" min="1" max="5" required>
+
+            <label>Department (1 or 2)</label>
+            <input type="number" name="department" min="1" max="2" required>
+
+            <label>Day (1–7)</label>
+            <input type="number" name="day" min="1" max="7" required>
+
+            <label>Team</label>
+            <input type="number" name="team" min="1" required>
+
+            <label>Targeted Productivity (0–1)</label>
+            <input type="number" step="0.01" min="0" max="1"
+                   name="targeted_productivity" required>
+
+            <label>SMV</label>
+            <input type="number" step="0.01" min="0" name="smv" required>
+
+            <label>Over Time</label>
+            <input type="number" min="0" name="over_time" required>
+
+            <label>Incentive</label>
+            <input type="number" min="0" name="incentive" required>
+
+            <label>Idle Time</label>
+            <input type="number" step="0.01" min="0" name="idle_time" required>
+
+            <label>Idle Men</label>
+            <input type="number" min="0" name="idle_men" required>
+
+            <label>No of Style Changes</label>
+            <input type="number" min="0" name="no_of_style_change" required>
+
+            <label>No of Workers</label>
+            <input type="number" step="1" min="1" name="no_of_workers" required>
+
+            <label>Month (1–12)</label>
+            <input type="number" min="1" max="12" name="month" required>
+
+            <button type="submit">Predict Productivity</button>
+        </form>
+    </div>
+</body>
 </html>
+
+

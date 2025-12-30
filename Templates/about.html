@@ -6,89 +6,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Employee Productivity Prediction Using ML</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    :root {
+        --bg-main: #0a0d12;
+        --bg-nav: rgba(10, 13, 18, 0.75);
+        --glass: rgba(255, 255, 255, 0.04);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --primary: #4cc9f0;
+        --accent: #7209b7;
+        --text-main: #e8edf2;
+        --text-muted: #9aa4b2;
+        --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
+        --blur: blur(18px);
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            background-color: black;
-            padding: 10px 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #00bfff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        nav a:hover {
-            background-color: #00a1d4;
-        }
+    body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        background:
+            radial-gradient(800px 400px at 10% -10%, rgba(114, 9, 183, 0.25), transparent),
+            radial-gradient(800px 400px at 90% 10%, rgba(76, 201, 240, 0.18), transparent),
+            var(--bg-main);
+        color: var(--text-main);
+        min-height: 100vh;
+    }
 
-        .container {
-            padding-top: 60px;
-            margin: 0 auto;
-            max-width: 800px;
-            text-align: center;
-        }
+    /* NAVBAR */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 14px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg-nav);
+        backdrop-filter: var(--blur);
+        border-bottom: 1px solid var(--glass-border);
+    }
 
+    nav span {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+    nav a {
+        text-decoration: none;
+        margin-left: 12px;
+        padding: 8px 18px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #fff;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 8px 20px rgba(114, 9, 183, 0.4);
+    }
+
+    nav a:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 14px 35px rgba(76, 201, 240, 0.55);
+    }
+
+    /* CONTAINER */
+    .container {
+        max-width: 980px;
+        margin: auto;
+        padding: 120px 22px 80px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 44px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 50px;
+        background: linear-gradient(90deg, #ffffff, #b9c6d3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* GLASS SECTIONS */
+    .section {
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.02)
+        );
+        backdrop-filter: var(--blur);
+        border-radius: 18px;
+        border: 1px solid var(--glass-border);
+        padding: 30px 34px;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow-xl);
+        transition: transform 0.35s ease;
+    }
+
+    .section:hover {
+        transform: translateY(-6px);
+    }
+
+    .section h2 {
+        font-size: 26px;
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, var(--primary), #b5179e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section p {
+        font-size: 17px;
+        line-height: 1.75;
+        color: var(--text-muted);
+    }
+
+    .section a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .section a:hover {
+        text-decoration: underline;
+    }
+
+    /* PROJECTS */
+    .projects li {
+        list-style: none;
+        margin-top: 20px;
+        padding: 22px 26px;
+        border-radius: 16px;
+        background: rgba(15, 18, 25, 0.85);
+        border: 1px solid var(--glass-border);
+        transition: all 0.35s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .projects li::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(76, 201, 240, 0.12),
+            transparent
+        );
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .projects li:hover::before {
+        opacity: 1;
+    }
+
+    .projects li:hover {
+        transform: translateY(-6px) scale(1.015);
+        box-shadow: 0 20px 45px rgba(76, 201, 240, 0.18);
+    }
+
+    .projects li h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .projects li p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--text-muted);
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
         h1 {
-            color: #333;
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 34px;
+        }
+
+        nav span {
+            font-size: 18px;
         }
 
         .section {
-            margin: 40px 0;
-            text-align: left;
+            padding: 24px;
         }
-
-        .section h2 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .section p {
-            font-size: 18px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .projects ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .projects li {
-            background-color: #f4f4f4;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .projects li h3 {
-            margin: 0 0 10px 0;
-            font-size: 22px;
-        }
-
-        .projects li p {
-            margin: 0;
-        }
+    }
     </style>
+
+
 </head>
 
 <body>
